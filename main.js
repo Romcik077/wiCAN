@@ -11,7 +11,7 @@ app.use(cookieParser());
 
 // Load database from .json file
 var JsonDB = require('node-json-db');
-var db = new JsonDB("file", true, true);
+var db = new JsonDB("usersDatabase", true, true);
 var users = db.getData("/users");
 
 
