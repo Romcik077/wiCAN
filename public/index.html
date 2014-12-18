@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        
+        <title>WiCAN Login</title>
+        <meta name="description" content="WiCAN Login">
+        <meta name="author" content="PRoman">
+        
+        <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/ui-lightness/jquery-ui.css" />
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+        
+        <link rel="stylesheet" href="css/style.css">
+        
+        <script src="scripts/index.js"></script>
+    </head>
+    <body>
+
+        
+        <div id="login-dialog" title="Login form">
+            <form>
+                <fieldset>
+                    <div id="testlogo">
+                        <img id="wican-logo" src="/images/wican-logo-draft_v2.png"></img>        
+                    </div>
+                    <br>&nbsp;<br>
+                    
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="email" value="" class="text ui-widget-content ui-corner-all">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all">
+                    <!-- Allow form submission with keyboard without duplicating the dialog button -->
+                    <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+                </fieldset>
+            </form>
+            
+            <p class="requestLoginResult"></p>
+        </div>
+        
+        <div id="newUser-dialog" title="Create new user">
+            <p class="validateTips">All form fields are required.</p>
+            
+            <p class="requestResult"></p>
+            
+            <form>
+                <fieldset>
+                    <label for="name">Name</label>
+                    <input type="text" name="newUserName" id="newUserName" value="" class="text ui-widget-content ui-corner-all">
+                    <label for="email">Email</label>
+                    <input type="text" name="newUserEmail" id="newUserEmail" value="" class="text ui-widget-content ui-corner-all">
+                    <label for="password">Password</label>
+                    <input type="password" name="newUserPasswd" id="newUserPasswd" value="" class="text ui-widget-content ui-corner-all">
+                    
+                    <!-- Allow form submission with keyboard without duplicating the dialog button -->
+                    <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+                </fieldset>
+            </form>
+        </div>
+    </body>
+</html>

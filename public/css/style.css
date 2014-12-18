@@ -1,0 +1,174 @@
+body{
+    font: 62.5% "Verdana", sans-serif;
+    background: #000000;
+    margin: 0;
+}
+
+#container {
+    display: none;
+}
+
+/* id */
+#menu {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 100vh;
+    width: 250px;
+    border: 0px;
+}
+
+#wican-logo {
+    width: 100%;
+    float: left;
+}
+
+#userbar {
+    background: #E0E0E0;
+    position: absolute;
+    top: 75px;
+    left: 0px;
+    width: 100%;
+    height: 100px;
+    border-top-style: solid;
+}
+
+#projectcontrol {
+    background: #E0E0E0;
+    position: absolute;
+    top: 175px;
+    left: 0px;
+    width: 100%;
+    height: 185px;
+    border-top-style: solid;
+}
+
+#tree {
+    position: absolute;
+    top: 360px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    border-top-style: solid;
+}
+
+#messagecontrol {
+    background: #E0E0E0;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 35px;
+    border-top-style: solid;
+}
+
+#workspace {
+    position: fixed;
+    top: 0.3vh;
+    left: 254px;
+    height: 99.4vh;
+    width: calc( 100% - 254px);
+    border: 0px;
+}
+
+.userbar {
+    padding: 5px;
+    padding-bottom: 0px;
+}
+
+#greeting {
+    font-size: 20px;
+}
+
+#logout-div {
+    position: absolute;
+    top: 65px;
+    left: 0px;
+}
+
+#help-div {
+    position: absolute;
+    top: 65px;
+    right: 0px;
+}
+
+#btnproject1-div {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.btnwidth {
+    width: 115px;
+}
+
+#btnproject2-div {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+#btnproject3-div {
+    position: absolute;
+    top: 54px;
+    left: 0px;
+}
+
+#btnproject4-div {
+    position: absolute;
+    top: 54px;
+    right: 0px;
+}
+
+#btnproject5-div {
+    position: absolute;
+    top: 81px;
+    left: 0px;
+}
+
+#btnproject6-div {
+    position: absolute;
+    top: 81px;
+    right: 0px;
+}
+
+#btnproject7-div {
+    position: absolute;
+    top: 108px;
+    left: 0px;
+}
+
+#btnproject8-div {
+    position: absolute;
+    top: 108px;
+    right: 0px;
+}
+
+#btnproject9-div {
+    position: absolute;
+    top: 27px;
+    left: 0px;
+}
+
+#btnproject10-div {
+    position: absolute;
+    top: 27px;
+    right: 0px;
+}
+
+#btnview-div {
+    position: absolute;
+    top: 147px;
+    left: 0px;
+}
+
+#btncontrol-div {
+    position: absolute;
+    top: 147px;
+    right: 0px;
+}
+
+
+    label, input { display:block; }
+    input.text { margin-bottom:12px; width:95%; padding: .4em; }
+    fieldset { padding:0; border:0; margin-top:25px; }

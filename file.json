@@ -1,0 +1,31 @@
+{
+    "users": [
+        {
+            "publicData": {
+                "name": "roma11",
+                "email": "roma11@gmail.com"
+            },
+            "passwd": "1234",
+            "expireTime": "2014-12-18T15:54:19.552Z",
+            "token": "ltZjnbxzGILR6i0qvXuowfnnwTnCcKJt6hzlzinCJ44rAZuIuL"
+        },
+        {
+            "publicData": {
+                "name": "roma",
+                "email": "roma@gmail.com"
+            },
+            "passwd": "hello",
+            "expireTime": "2014-12-16T13:13:44.493Z",
+            "token": "vBULCtCHy2kVjDJye6SIP6XMzcjiCQZf99KTvNp2QhfhjP2XZb"
+        },
+        {
+            "publicData": {
+                "name": "Panuta Roman",
+                "email": "panuta@gmail.com"
+            },
+            "passwd": "panuta",
+            "expireTime": "2014-12-18T16:04:47.336Z",
+            "token": "hjRj26hxrLt4UrDbJ73OPSpQBKyzQbaJbsb51cT6O5WNuvyBsW"
+        }
+    ]
+}
