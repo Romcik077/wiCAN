@@ -1,36 +1,24 @@
 var dialog1 = "#dialog1";
 var dialog2 = "#dialog2";
 
-var projectTree = [{
-    title: "Projects",
-    isFolder: true,
-    expand: true,
-    unselectable: false,
-    children: [{
-        title: "Project ",
-        isFolder: true,
-        key: "project1",
-        children: [
-            {title: "Sub-item 2."},
-            {title: "Sub-item 2.2"},                               
-            {title: "Item 3"},
-            {title: "Item 3"},
-            {title: "Item 3"},
-            {title: "Item 3"},
-            {title: "Item 3"}
-        ]},
-        {title: "Item 3"}
-    ]
-}];
+var
+createProject,
+newProjectDialog,
+newProjectForm;
 
-var tabs = null;
+var tabs;
 
 var connection;
 
 var userData;
+
+var projectTree;
     
 
 $( function() {
+    
+    showLoadingDialog();
+    
     // if user is running mozilla then use it's built-in WebSocket
     window.WebSocket = window.WebSocket || window.MozWebSocket;
 
@@ -65,12 +53,69 @@ $( function() {
             switch (recievedData.type) {
                 case 'getUserData':
                     userData = recievedData.result;
+                    
+                    if(userData.projects === undefined){
+                        userData.projects = [];
+                    }
+                    
+                    $("#username").text(recievedData.result.name);
+                    
+                    $("#tree")
+                    .dynatree({
+                        onClick: function(node, event){
+                            $( "#openProject" ).button("option", "disabled", true);
+                            $( "#removeProject" ).button("option", "disabled", true);
+                            $( "#runProject" ).button("option", "disabled", true);
+                            $( "#createWorkspace" ).button("option", "disabled", true);
+                            $( "#removeWorkspace" ).button("option", "disabled", true);
+                            $( "#creatEcu" ).button("option", "disabled", true);
+                            $( "#removeEcu" ).button("option", "disabled", true);
+                            $( "#createMessage" ).button("option", "disabled", true);
+                            $( "#removeMessage" ).button("option", "disabled", true);
+                            $( "#editMessage" ).button("option", "disabled", true);
+                            $( "#uploadDbcFile" ).button("option", "disabled", true);
+                            $( "#createView" ).button("option", "disabled", true);
+                            $( "#createControl" ).button("option", "disabled", true);
+                            
+                            if(node.data.key.indexOf("project") > -1){
+                                $( "#openProject" ).button("option", "disabled", false);
+                                $( "#removeProject" ).button("option", "disabled", false);
+                                $( "#runProject" ).button("option", "disabled", false);
+                            }
+                            
+                            if(node.data.key.indexOf("workspaces") > -1){
+                                $( "#createWorkspace" ).button("option", "disabled", false);
+                                $( "#removeWorkspace" ).button("option", "disabled", false);
+                            }
+                            
+                            if(node.data.key.indexOf("ecus") > -1){
+                                $( "#creatEcu" ).button("option", "disabled", false);
+                                $( "#removeEcu" ).button("option", "disabled", false);
+                            }
+                            
+                            
+                        },
+                        children: userData.projects
+                    });
+                    
+                    projectTree = $("#tree").dynatree("getTree");
+                    
+                    if(userData.projects.length !== 0) {
+                        listProjectsTitle();
+                    } else {
+                        
+                    }
+                    
+                    
+                    
                     hideLoadingDialog();
                     $("#container").show();
                     break;
                 case 'postUserData':
                     if(recievedData.result != "ok") {
                         alert("Update server data error");
+                    } else {
+                        console.log("Updated");
                     }
                     break;
                 case 'cmd':
@@ -83,13 +128,7 @@ $( function() {
             console.log('This doesn\'t look like a valid JSON: ', message.data);
             return;
         }
-        
-        
-        
-        // handle incoming message
     };
-    
-    showLoadingDialog();
     
     tabs = $( "#tabs" ).tabs({
         heightStyle: "fill"
@@ -102,11 +141,6 @@ $( function() {
     });
 
 	tabs.tabs( "refresh" );
-    
-    $("#tree")
-        .dynatree({
-            children: null
-        });
     
     // Link to open the dialog
     $( "#logout-button" )
@@ -127,41 +161,162 @@ $( function() {
             window.location.href = "/help.html";
         });
         
-    $( "#btnproject1" )
-        .button();
+    createProject = $( "#createProject" )
+        .button()
+        .click(function(event) {
+            newProjectDialog.dialog("open");
+        });
         
-    $( "#btnproject2" )
-        .button();
+    $( "#removeProject" )
+        .button({
+            disabled: true
+        });
+        
+    $( "#openProject" )
+        .button({
+            disabled: true
+        })
+        .click(function(event) {
+            listProjectsTitle();
+            
+            openProject(projectTree.getActiveNode());
+        });
+        
+    $( "#runProject" )
+        .button({
+            disabled: true
+        });
+        
+    $( "#createWorkspace" )
+        .button({
+            disabled: true
+        });
     
-    $( "#btnproject3" )
-        .button();
+    $( "#removeWorkspace" )
+        .button({
+            disabled: true
+        });
         
-    $( "#btnproject4" )
-        .button();
-        
-    $( "#btnproject5" )
-        .button();
+    $( "#creatEcu" )
+        .button({
+            disabled: true
+        });
     
-    $( "#btnproject6" )
-        .button();
-        
-    $( "#btnproject7" )
-        .button();
+    $( "#removeEcu" )
+        .button({
+            disabled: true
+        });
     
-    $( "#btnproject8" )
-        .button();
+    $( "#createMessage" )
+        .button({
+            disabled: true
+        });
         
-    $( "#btnproject9" )
-        .button();
+    $( "#removeMessage" )
+        .button({
+            disabled: true
+        });
         
-    $( "#btnproject10" )
-        .button();
+    $( "#editMessage" )
+        .button({
+            disabled: true
+        });
     
-    $( "#btnview" )
-        .button();
+    $( "#uploadDbcFile" )
+        .button({
+            disabled: true
+        });
     
-    $( "#btncontrol" )
-        .button();
+    $( "#createView" )
+        .button({
+            disabled: true
+        });
+    
+    $( "#createControl" )
+        .button({
+            disabled: true
+        });
+        
+    newProjectDialog = $( "#newProject-dialog" ).dialog({
+        autoOpen: false,
+        height: 170,
+        width: 200,
+        minHeight: 170,
+        maxHeight: 170,
+        minWidth:200,
+        maxWidth:350,
+        modal: true,
+        buttons: [
+            {
+                text: "Create a project",
+                click: function() {
+                    newProjectForm.submit();
+                }
+            },
+            {
+                text: "Cancel",
+                click: function() {
+                    newProjectDialog.dialog( "close" );
+                }
+            }
+        ],
+        close: function() {
+            newProjectForm[0].reset();
+        }
+    });
+    
+    newProjectForm = newProjectDialog.find( "form" ).on( "submit", function( event ) {
+        event.preventDefault();
+        
+        // arata forma pentru nume proiect
+        var keyValid = false;
+        var key;
+        while(!keyValid) {
+            key = make_token(5);
+            
+            if(userData.projects.length !== 0) {
+                for(var i=0; i<userData.projects.length; i++) {
+                    if(userData.projects[i].key === key) {
+                        keyValid = false;
+                    } else {
+                        keyValid = true;
+                    }
+                }
+            } else {
+                keyValid = true;
+            }
+        }
+        
+        var newProjectTemplate = {
+            title: $("#newProjectName").val(),
+            key: "project_" + key,
+            isFolder: true,
+            expand: false,
+            children: [
+                {
+                    title: "Workspaces",
+                    isFolder: true,
+                    key: "workspaces",
+                    children: []
+                },
+                {
+                    title: "ECUs",
+                    isFolder: true,
+                    key: "ecus",
+                    children: []
+                }
+            ]
+        };
+        
+        userData.projects.push(newProjectTemplate);
+        projectTree.getRoot().removeChildren();
+        projectTree.getRoot().addChild(userData.projects);
+        listProjectsTitle();
+        projectTree.activateKey("project_"+key);
+        openProject(projectTree.getActiveNode());
+        
+        newProjectDialog.dialog( "close" );
+    }); 
 
 	init_dialog(dialog1);
 	init_dialog(dialog2);
@@ -206,9 +361,15 @@ function init_dialog(parameter) {
 		icons: { primary: "ui-icon-newwin"}
 	})
 	.click(function( event ) {
-	    hideLoadingDialog();
-// 		$( "#dialog1" ).dialog( "open" );
 		event.preventDefault();
+	   // hideLoadingDialog();
+// 		$( "#dialog1" ).dialog( "open" );
+        var message = {
+            type: "postUserData",
+            result: userData
+        };
+        
+        connection.send(JSON.stringify(message));
 	});
 	
 	$( "#dialog2-link" ).button({
@@ -239,4 +400,35 @@ function showLoadingDialog() {
 function hideLoadingDialog() {
     loadingDialog.dialog("close");
     
+}
+
+function listProjectsTitle() {
+    for(var i=0; i<projectTree.getRoot().getChildren().length; i++) {
+        projectTree.getRoot().getChildren()[i].removeChildren();
+    }
+}
+
+function openProject(currentNode) {
+    if(currentNode){
+        for(var i=0; i<userData.projects.length; i++) {
+            if(currentNode.data.key === userData.projects[i].key){
+                currentNode.addChild(userData.projects[i].children);
+                currentNode.expand(true);
+                break;
+            }
+        }
+    } else {
+        alert("Select project");
+    }
+}
+
+function make_token(length)
+{
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for( var i=0; i < length; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
 }

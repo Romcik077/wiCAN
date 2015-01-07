@@ -37,31 +37,33 @@
             </div>
             
             <div id="userbar">
-                <div id="greeting" class="userbar">Hello %username%</div>
-                <div id="lastseen" class="userbar">Last seen %date%</div>
+                <div id="greeting" class="userbar">Hello <span id="username"></span></div>
                 
                 <div id="logout-div" class="userbar"><button id="logout-button">Logout</button></div>
                 <div id="help-div" class="userbar"><button id="help-button">Help</button></div>
             </div>
             
             <div id="projectcontrol">
-                <div id="btnproject1-div" class="userbar"><button id="btnproject1" class="btnwidth">Create project</button></div>
-                <div id="btnproject2-div" class="userbar"><button id="btnproject2" class="btnwidth">Remove project</button></div>
+                <div id="createProject-div" class="userbar"><button id="createProject" class="btnwidth">Create project</button></div>
+                <div id="removeProject-div" class="userbar"><button id="removeProject" class="btnwidth">Remove project</button></div>
                 
-                <div id="btnproject9-div" class="userbar"><button id="btnproject9" class="btnwidth">Open project</button></div>
-                <div id="btnproject10-div" class="userbar"><button id="btnproject10" class="btnwidth">Run project</button></div>
+                <div id="openProject-div" class="userbar"><button id="openProject" class="btnwidth">Open project</button></div>
+                <div id="runProject-div" class="userbar"><button id="runProject" class="btnwidth">Run project</button></div>
                 
-                <div id="btnproject3-div" class="userbar"><button id="btnproject3" class="btnwidth">Create message</button></div>
-                <div id="btnproject4-div" class="userbar"><button id="btnproject4" class="btnwidth">Remove message</button></div>
+                <div id="createWorkspace-div" class="userbar"><button id="createWorkspace" class="btnwidth">Create workspace</button></div>
+                <div id="removeWorkspace-div" class="userbar"><button id="removeWorkspace" class="btnwidth">Remove workspace</button></div>
                 
-                <div id="btnproject5-div" class="userbar"><button id="btnproject5" class="btnwidth">Edit message</button></div>
-                <div id="btnproject6-div" class="userbar"><button id="btnproject6" class="btnwidth">Upload DBC file</button></div>
+                <div id="creatEcu-div" class="userbar"><button id="creatEcu" class="btnwidth">Create ECU</button></div>
+                <div id="removeEcu-div" class="userbar"><button id="removeEcu" class="btnwidth">Remove ECU</button></div>
                 
-                <div id="btnproject7-div" class="userbar"><button id="btnproject7" class="btnwidth">Create workspace</button></div>
-                <div id="btnproject8-div" class="userbar"><button id="btnproject8" class="btnwidth">Remove workspace</button></div>
+                <div id="createMessage-div" class="userbar"><button id="createMessage" class="btnwidth">Create message</button></div>
+                <div id="removeMessage-div" class="userbar"><button id="removeMessage" class="btnwidth">Remove message</button></div>
                 
-                <div id="btnview-div" class="userbar"><button id="btnview" class="btnwidth">Create view</button></div>
-                <div id="btncontrol-div" class="userbar"><button id="btncontrol" class="btnwidth">Create control</button></div>
+                <div id="editMessage-div" class="userbar"><button id="editMessage" class="btnwidth">Edit message</button></div>
+                <div id="uploadDbcFile-div" class="userbar"><button id="uploadDbcFile" class="btnwidth">Upload DBC file</button></div>
+                
+                <div id="createView-div" class="userbar"><button id="createView" class="btnwidth">Create view</button></div>
+                <div id="createControl-div" class="userbar"><button id="createControl" class="btnwidth">Create control</button></div>
             </div>
             
             <div id="tree"></div>
@@ -92,6 +94,18 @@
         
         <div id="dialog2">
             <p>Dialog 2 text</p>
+        </div>
+        
+        <div id="newProject-dialog" title="Create new project">
+            <form>
+                <fieldset>
+                    <label for="name">Name</label>
+                    <input type="text" name="newProjectName" id="newProjectName" value="" class="text ui-widget-content ui-corner-all">
+                    
+                    <!-- Allow form submission with keyboard without duplicating the dialog button -->
+                    <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+                </fieldset>
+            </form>
         </div>
     </body>
 </html>

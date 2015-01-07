@@ -39,13 +39,13 @@ body{
     top: 175px;
     left: 0px;
     width: 100%;
-    height: 185px;
+    height: 210px;
     border-top-style: solid;
 }
 
 #tree {
     position: absolute;
-    top: 360px;
+    top: 385px;
     left: 0px;
     height: 100%;
     width: 100%;
@@ -92,79 +92,92 @@ body{
     right: 0px;
 }
 
-#btnproject1-div {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-}
 
 .btnwidth {
     width: 115px;
 }
 
-#btnproject2-div {
+#createProject-div {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+#removeProject-div {
     position: absolute;
     top: 0px;
     right: 0px;
 }
 
-#btnproject3-div {
-    position: absolute;
-    top: 54px;
-    left: 0px;
-}
-
-#btnproject4-div {
-    position: absolute;
-    top: 54px;
-    right: 0px;
-}
-
-#btnproject5-div {
-    position: absolute;
-    top: 81px;
-    left: 0px;
-}
-
-#btnproject6-div {
-    position: absolute;
-    top: 81px;
-    right: 0px;
-}
-
-#btnproject7-div {
-    position: absolute;
-    top: 108px;
-    left: 0px;
-}
-
-#btnproject8-div {
-    position: absolute;
-    top: 108px;
-    right: 0px;
-}
-
-#btnproject9-div {
+#openProject-div {
     position: absolute;
     top: 27px;
     left: 0px;
 }
 
-#btnproject10-div {
+#runProject-div {
     position: absolute;
     top: 27px;
     right: 0px;
 }
 
-#btnview-div {
+#createWorkspace-div {
+    position: absolute;
+    top: 54px;
+    left: 0px;
+}
+
+#removeWorkspace-div {
+    position: absolute;
+    top: 54px;
+    right: 0px;
+}
+
+#creatEcu-div {
+    position: absolute;
+    top: 93px;
+    left: 0px;
+}
+
+#removeEcu-div {
+    position: absolute;
+    top: 93px;
+    right: 0px;
+}
+
+#createMessage-div {
+    position: absolute;
+    top: 120px;
+    left: 0px;
+}
+
+#removeMessage-div {
+    position: absolute;
+    top: 120px;
+    right: 0px;
+}
+
+#editMessage-div {
     position: absolute;
     top: 147px;
     left: 0px;
 }
 
-#btncontrol-div {
+#uploadDbcFile-div {
     position: absolute;
     top: 147px;
+    right: 0px;
+}
+
+#createView-div {
+    position: absolute;
+    top: 174px;
+    left: 0px;
+}
+
+#createControl-div {
+    position: absolute;
+    top: 174px;
     right: 0px;
 }
 

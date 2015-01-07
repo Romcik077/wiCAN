@@ -137,18 +137,20 @@ wsServer.on('request', function(request) {
                     
                     switch (recievedData.type) {
                         case 'getUserData':
+                            console.log("User get data from database");
                             recievedData.result = connectedUser;
                             connection.send(JSON.stringify(recievedData));
                             break;
                         case 'postUserData':
+                            console.log("User post data to database");
                             for(var i = 0; i < users.length; i++) {
-                                if(users[i].publicData.email === recievedData.data.email) {
-                                    users[i].publicData = recievedData.data;
+                                if(users[i].publicData.email === recievedData.result.email) {
+                                    users[i].publicData = recievedData.result;
                                 }
                             }
                             db.push("/users", users);
                             recievedData.result = "ok";
-                            connection.send(recievedData);
+                            connection.send(JSON.stringify(recievedData));
                             break;
                         case 'cmd':
                                 
@@ -167,7 +169,7 @@ wsServer.on('request', function(request) {
     });
 
     connection.on('close', function(connection) {
-        // close user connection
+        console.log("Connection closed %j", connection);
     });
 });
 
