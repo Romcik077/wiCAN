@@ -58,8 +58,8 @@ $(function() {
     valid = valid && checkRegexp( newUserPasswd, /^([0-9a-zA-Z])+$/, "Password field only allow : a-z 0-9" );
     
     if ( valid ) {
-    $(":button:contains('Cancel')").prop("disabled", true).addClass("ui-state-disabled");
-    $(":button:contains('Create an account')").prop("disabled", true).addClass("ui-state-disabled");
+      $(":button:contains('Cancel')").prop("disabled", true).addClass("ui-state-disabled");
+      $(":button:contains('Create an account')").prop("disabled", true).addClass("ui-state-disabled");
       $.get("/register?name="+ newUserName.val() +"&email="+ newUserEmail.val() +"&passwd="+ newUserPasswd.val(), function(data,status){
         if(status === "success"){
           requestResult.text( "Register succeseded" );

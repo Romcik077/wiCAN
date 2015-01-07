@@ -11,7 +11,7 @@ ul.dynatree-container
 	background-color: transparent;
 	border: 1px dotted transparent; /* */
 	overflow: auto;
-	height: calc(100% - 395px); /* issue 263, 470 */
+	height: calc(100% - 360px); /* issue 263, 470 */
 	min-height: 0%;
 }
 

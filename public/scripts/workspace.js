@@ -62,7 +62,7 @@ $( function() {
                     
                     $("#tree")
                     .dynatree({
-                        onClick: function(node, event){
+                        onActivate: function(node, event){
                             $( "#openProject" ).button("option", "disabled", true);
                             $( "#removeProject" ).button("option", "disabled", true);
                             $( "#runProject" ).button("option", "disabled", true);
@@ -240,11 +240,11 @@ $( function() {
     newProjectDialog = $( "#newProject-dialog" ).dialog({
         autoOpen: false,
         height: 170,
-        width: 200,
+        width: 350,
         minHeight: 170,
         maxHeight: 170,
         minWidth:200,
-        maxWidth:350,
+        maxWidth:400,
         modal: true,
         buttons: [
             {
@@ -262,60 +262,70 @@ $( function() {
         ],
         close: function() {
             newProjectForm[0].reset();
+            $("label[for='name']").text("Name");
+            $("#newProjectName").removeClass("ui-state-error");
         }
     });
     
     newProjectForm = newProjectDialog.find( "form" ).on( "submit", function( event ) {
         event.preventDefault();
         
-        // arata forma pentru nume proiect
-        var keyValid = false;
-        var key;
-        while(!keyValid) {
-            key = make_token(5);
-            
-            if(userData.projects.length !== 0) {
-                for(var i=0; i<userData.projects.length; i++) {
-                    if(userData.projects[i].key === key) {
-                        keyValid = false;
-                    } else {
-                        keyValid = true;
+        var valid = true;
+        var newProjectName = $("#newProjectName");
+    
+        valid = valid && checkLength( newProjectName, "Name", 3, 16 );
+        
+        if(valid) {
+            var keyValid = false;
+            var key;
+            while(!keyValid) {
+                key = make_token(5);
+                
+                if(userData.projects.length !== 0) {
+                    for(var i=0; i<userData.projects.length; i++) {
+                        if(userData.projects[i].key === key) {
+                            keyValid = false;
+                        } else {
+                            keyValid = true;
+                        }
                     }
+                } else {
+                    keyValid = true;
                 }
-            } else {
-                keyValid = true;
             }
+            
+            var newProjectTemplate = {
+                title: $("#newProjectName").val(),
+                key: "project_" + key,
+                isFolder: true,
+                expand: false,
+                children: [
+                    {
+                        title: "Workspaces",
+                        isFolder: true,
+                        key: "workspaces",
+                        children: []
+                    },
+                    {
+                        title: "ECUs",
+                        isFolder: true,
+                        key: "ecus",
+                        children: []
+                    }
+                ]
+            };
+            
+            userData.projects.push(newProjectTemplate);
+            projectTree.getRoot().removeChildren();
+            projectTree.getRoot().addChild(userData.projects);
+            listProjectsTitle();
+            projectTree.activateKey("project_"+key);
+            openProject(projectTree.getActiveNode());
+            
+            newProjectDialog.dialog( "close" );
+        } else {
+            
         }
-        
-        var newProjectTemplate = {
-            title: $("#newProjectName").val(),
-            key: "project_" + key,
-            isFolder: true,
-            expand: false,
-            children: [
-                {
-                    title: "Workspaces",
-                    isFolder: true,
-                    key: "workspaces",
-                    children: []
-                },
-                {
-                    title: "ECUs",
-                    isFolder: true,
-                    key: "ecus",
-                    children: []
-                }
-            ]
-        };
-        
-        userData.projects.push(newProjectTemplate);
-        projectTree.getRoot().removeChildren();
-        projectTree.getRoot().addChild(userData.projects);
-        listProjectsTitle();
-        projectTree.activateKey("project_"+key);
-        openProject(projectTree.getActiveNode());
-        
-        newProjectDialog.dialog( "close" );
     }); 
 
 	init_dialog(dialog1);
@@ -431,4 +441,17 @@ function make_token(length)
         text += possible.charAt(Math.floor(Math.random() * possible.length));
 
     return text;
+}
+
+function checkLength( o, n, min, max ) {
+    if ( o.val().length > max || o.val().length < min ) {
+        o.addClass( "ui-state-error" );
+        $("label[for='name']").text("Nmae: Length must be between " + min + " and " + max + ".");
+        setTimeout(function() {
+            o.removeClass( "ui-state-error", 1500 );
+        }, 500 );
+        return false;
+    } else {
+        return true;
+    }
 }
