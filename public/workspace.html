@@ -72,16 +72,16 @@
         <div id="workspace" class="ui-widget-content">
             <div id="tabs">
                 <ul>
-                    <li><a href="#tabs-1">Start page</a></li>
+                    <li><a href="#startTab">Start page</a></li>
                 </ul>
-                <div id="tabs-1">
+                <div id="startTab">
                     <p>For start work open the project.</p>
                     
-            <div>
-                <h2 class="demoHeaders">Dialogs</h2>
-                <button id="dialog1-link">Open Dialog 1</button>
-                <button id="dialog2-link">Open Dialog 2</button>
-            </div>
+                    <div>
+                        <h2 class="demoHeaders">Dialogs</h2>
+                        <button id="dialog1-link">Open Dialog 1</button>
+                        <button id="dialog2-link">Open Dialog 2</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -99,8 +99,47 @@
         <div id="newProject-dialog" title="Create new project">
             <form>
                 <fieldset>
-                    <label for="name">Name</label>
+                    <label for="nameProject">Name</label>
                     <input type="text" name="newProjectName" id="newProjectName" value="" class="text ui-widget-content ui-corner-all">
+                    
+                    <!-- Allow form submission with keyboard without duplicating the dialog button -->
+                    <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+                </fieldset>
+            </form>
+        </div>
+        
+        <div id="newWorkspace-dialog" title="Create new workspace">
+            <form>
+                <fieldset>
+                    <label for="nameWorkspace">Name</label>
+                    <input type="text" name="newWorkspaceName" id="newWorkspaceName" value="" class="text ui-widget-content ui-corner-all">
+                    
+                    <!-- Allow form submission with keyboard without duplicating the dialog button -->
+                    <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+                </fieldset>
+            </form>
+        </div>
+        
+        <div id="newEcu-dialog" title="Create new ECU">
+            <form>
+                <fieldset>
+                    <label for="nameEcu">Name</label>
+                    <input type="text" name="newEcuName" id="newEcuName" value="" class="text ui-widget-content ui-corner-all">
+                    
+                    <!-- Allow form submission with keyboard without duplicating the dialog button -->
+                    <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+                </fieldset>
+            </form>
+        </div>
+        
+        <div id="newMessage-dialog" title="Create new Message">
+            <form>
+                <fieldset>
+                    <label for="nameMessage">Name</label>
+                    <input type="text" name="newMessageName" id="newMessageName" value="" class="text ui-widget-content ui-corner-all">
+                    
+                    <label for="nameID">ID</label>
+                    <input type="text" name="newIdName" id="newIdName" value="" class="text ui-widget-content ui-corner-all">
                     
                     <!-- Allow form submission with keyboard without duplicating the dialog button -->
                     <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
