@@ -104,7 +104,7 @@ $(function() {
       {
         text: "Cancel",
         icons: {
-          primary: "ui-icon-power"
+          primary: "ui-icon-close"
         },
         click: function() {
           newUserDialog.dialog( "close" );
@@ -137,6 +137,15 @@ $(function() {
         .hide();
     },
     buttons: [
+      {
+        text: "Help",
+        icons: {
+          primary: "ui-icon-note"
+        },
+        click: function() {
+          window.location.href = "/help.html";
+        }
+      },
       {
         text: "Create new user",
         icons: {

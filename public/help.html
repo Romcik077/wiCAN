@@ -1,9 +1,101 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>wiCAN Help</title>
+        <meta charset="utf-8">
+        
+        <title>WiCAN Help</title>
+        <meta name="description" content="WiCAN Help">
+        <meta name="author" content="PRoman">
+        
+        <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/ui-lightness/jquery-ui.css" />
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+        
+        <script type="text/javascript">
+            $(function() {
+                $( "#accordion" ).accordion({
+                    heightStyle: "content",
+                    collapsible: true,
+                    active: 100
+                });
+            });
+        </script>
+        
+        <style type="text/css">
+            body {
+                font: 75% "Verdana", sans-serif;
+                margin: 25px;
+            }
+        </style>
     </head>
-    <body>
-        <h1>HELP ME! PLEASE!!!</h1>
+    <body class="ui-widget-content">
+        <div>
+            <h1 align="center">wiCAN help page</h1>
+            <p align="center">
+                Aplicația wiCAN este o aplicație web bazata pe javascript care permite controlul și recepționarea 
+                mesajelor de pe dispozitivul wiCAN. In continuare se va prezenta principiile de baza in lucrul cu aceasta aplicație.
+            </p>
+        </div>
+        <div id="accordion">
+            <h3>Crearea și logarea utilizatorilor</h3>
+            <div>
+                <p>
+                    Logarea utilizatorilor se executa folosind un e-mail și parolă specificate
+                    la înregistrare. Astfel pentru a ne autentifica trebuie să introducem datele în
+                    zonele necesare și să apăsăm butonul ”Login”.
+                </p>
+                <img src="/images/login_example.png"></img>
+                <p>
+                    În cazul în care suntem un utilizator nou și avem nevoie de un cont nou este necesar să 
+                    apasăm butonul ”Create new user” și va apare un dialog unde este necesar sa introduceți datele personale
+                    cum ar fi Numele, e-mail și parola. După introducerea datelor apăsați butonul ”Create an account”.
+                </p>
+                <img src="/images/create_user_example.png"></img>
+            </div>
+            <h3>Descrierea spațiului de lucru</h3>
+            <div>
+                <p>
+                    Spațiul de lucru se împarte în mai multe zone:
+                    <ol>
+                        <li>Zona utilizatorului</li>
+                        <li>Zona de control a proiectelor</li>
+                        <li>Zona de afișare a proiectelor</li>
+                        <li>Zona de lucru cu proiectul</li>
+                    </ol>
+                    <img style="max-width: 100%;" src="/images/workspace_example.png"></img>
+                    <b>1.</b> În zona utilizatorul sunt disponibile două butoane: ”Logout” care servește pentru delogarea din sistem
+                    și ”Help” pentru afișarea acestei pagini.
+                    <br/>
+                    <b>2.</b> În zona de control a proiectelor sunt disponibile butoane pentru modificarea și controlul proiectelor.
+                    Butoanele inițial sunt dezactivate și se activeaza doar în cazul când utilizatorul selectează anumite zone ale proiectului.
+                    Lista butoanelor și destinația lor este prezentată mai jos:
+                    <ul>
+                        <li>Create project - Crearea unui nou proiect.</li>
+                        <li>Remove project - Ștergerea unui proiect din listă.</li>
+                        <li>Open project - Deschiderea proiectului selectat</li>
+                        <li>Run project - Rularea proiectului. Prusupune transmiterea, recepționarea și afșarea mesajelor inițial configurate.</li>
+                        <li>Create workspace - Crearea unui nou spațiu de lucru pentru controlul sau afișarea mesajelor.</li>
+                        <li>Remove workspace - Ștergerea spațiului de lucru selectat.</li>
+                        <li>Create ECU - Crearea unui nou ECU (Electronic Control Unit).</li>
+                        <li>Remove ECU - Ștergerea unui ECU selectat.</li>
+                        <li>Create message - Crearea unui mesaj pentru transmisie sau recepție, în funție de folderul selectat.</li>
+                        <li>Remove message - Ștergerea mesajului selectat.</li>
+                        <li>Edit message - Editarea mesajului selectat.</li>
+                        <li>Upload DBC file - Încaărcarea unui fișier de format DBC, care descrie structura proiectului în zona de mesaje.</li>
+                        <li>Create view - Crearea unei vizualizari a unui mesaj în spațiul de lucru selectat.</li>
+                        <li>Create control - Crearea unui nou control al unui mesaj în spațiul de lucru selectat.</li>
+                    </ul>
+                    <b>3.</b> În această zonă este afișată lista de proiecte disponibile și în cazul unui proiect deschis,
+                    acestuia i se fac disponibile subdomeniile respective.
+                    <br/>
+                    <b>4.</b> Zona aceasta este destinată controlului și vizualizării rezultatelor de transmitere și recepționare a mesajelor 
+                    pentru fiecare spațiu de lucru cu mesajele create anticipat.
+                </p>
+            </div>
+            <h3>Video tutorial</h3>
+            <div align="center">
+                <iframe width="560" height="315" src="//www.youtube.com/embed/C4ZCkZ43G10" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
     </body>
 </html>

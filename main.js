@@ -14,6 +14,13 @@ var JsonDB = require('node-json-db');
 var db = new JsonDB("usersDatabase", true, true);
 var users = db.getData("/users");
 
+app.get('/', function(req, res, next) {
+    if(req.cookies.wiCANtoken){
+        res.redirect('/workspace.html');
+    } else {
+        next();
+    }
+});
 
 // Set folder of public files
 app.use(express.static(__dirname + '/public'));
@@ -72,10 +79,10 @@ app.get("/register", function(req, res) {
     users.push({
         publicData: {
             name: name,
-            email: email
+            email: email,
+            projects: []
         },
         passwd: passwd
-        
     });
     db.push("/users", users);
     

@@ -97,19 +97,25 @@ $( function() {
                             }
                             if(node.data.key.indexOf("workspace_") > -1) {
                                 $( "#removeWorkspace" ).button("option", "disabled", false);
-                                $( "#createView" ).button("option", "disabled", false);
-                                $( "#createControl" ).button("option", "disabled", false);
                             }
                             
                             if(node.data.key.indexOf("ecus") > -1){
                                 $( "#creatEcu" ).button("option", "disabled", false);
                             }
+                            
                             if(node.data.key.indexOf("ecu_") > -1) {
                                 $( "#removeEcu" ).button("option", "disabled", false);
                             }
+                            
                             if(node.data.key.indexOf("tx-messages") > -1 || node.data.key.indexOf("rx-messages") > -1) {
                                 $( "#createMessage" ).button("option", "disabled", false);
-                                // $( "#removeMessage" ).button("option", "disabled", false);
+                            }
+                            
+                            if(node.data.key.indexOf("message_") > -1) {
+                                $( "#removeMessage" ).button("option", "disabled", false);
+                                $( "#editMessage" ).button("option", "disabled", false);
+                                $( "#createView" ).button("option", "disabled", false);
+                                $( "#createControl" ).button("option", "disabled", false);
                             }
                         },
                         clickFolderMode: 1
@@ -118,6 +124,7 @@ $( function() {
                     projectTree = $("#tree").dynatree("getTree");
                     
                     projectTree.getRoot().addChild(userData.projects);
+                    currentProjectData = null;
                     updateTree();
                     
                     hideLoadingDialog();
@@ -203,7 +210,7 @@ $( function() {
                 }
             }
             postUserData();
-            updateTree();
+            updateTree(projectTree.getRoot().getChildren()[0].data.key);
             updateTabs();
         });
         
@@ -287,13 +294,28 @@ $( function() {
         .button({
             disabled: true
         })
-        .click((function(event) {
+        .click(function(event) {
             newMessageDialog.dialog("open");
-        }));
+        });
         
     $( "#removeMessage" )
         .button({
             disabled: true
+        })
+        .click(function(event) {
+            var messageParent = projectTree.getActiveNode().getParent().data;
+            var messageToRemove = projectTree.getActiveNode().data.key;
+            for(var i=0; i<messageParent.children.length; i++){
+                if(messageParent.children[i].key === messageToRemove) {
+                    messageParent.children.splice(i,1);
+                    var nodeToRemove = projectTree.getNodeByKey(messageToRemove);
+                    nodeToRemove.remove();
+                    break;
+                }
+            }
+            postUserData();
+            updateTree(messageParent.key);
+            updateTabs(true);
         });
         
     $( "#editMessage" )
@@ -572,13 +594,12 @@ $( function() {
         }
     }); 
     
-    
     newMessageDialog = $( "#newMessage-dialog" ).dialog({
         autoOpen: false,
-        height: 170,
+        height: 300,
         width: 350,
-        minHeight: 170,
-        maxHeight: 170,
+        minHeight: 300,
+        maxHeight: 300,
         minWidth:250,
         maxWidth:400,
         modal: true,
@@ -765,8 +786,10 @@ function updateTree(activeNode) {
         currentProjectNode.removeChildren();
         currentProjectNode.addChild(currentProjectData.children);
     } else {
-        for(var i=0; i<listOfChildrenTree.length; i++) {
-            listOfChildrenTree[i].removeChildren();
+        if(listOfChildrenTree){
+            for(var i=0; i<listOfChildrenTree.length; i++) {
+                listOfChildrenTree[i].removeChildren();
+            }
         }
         
         if(currentProjectData) {
@@ -857,8 +880,7 @@ function updateTabs(newProjectFlag) {
     } 
 }
 
-function make_token(length)
-{
+function make_token(length) {
     var text = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
